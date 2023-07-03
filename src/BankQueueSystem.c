@@ -201,7 +201,7 @@ void init_system()
 	//初始化管理员数据
 	Admin admin;
 	query_admin(&admin, "admin");
-	if(admin.id == -1){
+	if(admin.id < 0){
 		strcpy(admin.login_name, "admin");
 		strcpy(admin.password, "123456");
 		insert_admin(&admin);
