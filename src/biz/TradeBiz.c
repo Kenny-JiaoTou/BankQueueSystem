@@ -58,6 +58,10 @@ void start_trade()
 			}
 			else {
 				create_card(curr_window->customer->id);
+				Card newCard;			//新建的卡
+				query_card_latest(&newCard);
+				//更新id
+				choose_card = newCard.card_id;
 			}
 		}
 		show_date(out_target, get_cur_date());

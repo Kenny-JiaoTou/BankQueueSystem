@@ -45,9 +45,10 @@ time_t str_to_time(char* str_time)
 	return mktime(&pTime);
 }
 
+/** 计算两个字符串时间日期之差 */
 long get_date_diff(char* str_time1, char* str_time2)
 {
-    return str_to_time(str_time1, str_time2);
+    return str_to_time(str_time1) - str_to_time(str_time2);
 }
 
 

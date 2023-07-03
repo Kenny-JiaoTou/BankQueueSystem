@@ -9,41 +9,54 @@ use `BankQueueSystem`;
 drop table if exists `admin`;
 create table `admin`(
 	`id` int auto_increment,
-	`login_name` varchar(50) not null		comment '¹ÜÀíÔ±id',
-	`password`	 varchar(200) not null		comment 'µÇÂ¼ÃÜÂë',
-	`login_time` datetime default now()		comment 'ÉÏ´ÎµÇÂ¼Ê±¼ä',
+	`login_name` varchar(50) not null		comment 'ç®¡ç†å‘˜id',
+	`password`	 varchar(200) not null		comment 'ç™»å½•å¯†ç ',
+	`login_time` datetime default now()		comment 'ä¸Šæ¬¡ç™»å½•æ—¶é—´',
 	primary key (`id`) using btree
-)ENGINE=InnoDB comment '¹ÜÀíÔ±±í';
+)ENGINE=InnoDB comment 'ç®¡ç†å‘˜è¡¨';
 
 drop table if exists `customer`;
 create table `customer`(
-	`id` int auto_increment					comment '¿Í»§±àºÅ',
-	`name` varchar(50) not null				comment '¿Í»§Ãû³Æ',
-	`vip_level` int default null			comment 'vipµÈ¼¶£¬nullÎª·Çvip¿Í»§',
-	`begin_time` datetime					comment 'ÅÅºÅ¿ªÊ¼Ê±¼ä',
-	`end_time` datetime						comment 'ÅÅºÅ½áÊøÊ±¼ä',
+	`id` int auto_increment					comment 'å®¢æˆ·ç¼–å·',
+	`name` varchar(50) not null				comment 'å®¢æˆ·åç§°',
+	`vip_level` int default null			comment 'vipç­‰çº§ï¼Œnullä¸ºéžvipå®¢æˆ·',
+	`begin_time` datetime					comment 'æŽ’å·å¼€å§‹æ—¶é—´',
+	`end_time` datetime						comment 'æŽ’å·ç»“æŸæ—¶é—´',
 	primary key (`id`) using btree
-)ENGINE=InnoDB AUTO_INCREMENT=50000 comment '¿Í»§ÐÅÏ¢±í';
+)ENGINE=InnoDB AUTO_INCREMENT=50000 comment 'å®¢æˆ·ä¿¡æ¯è¡¨';
 
 drop table if exists `card`;
 create table `card`(
-	`card_id` int auto_increment			comment '¿¨ºÅ',
-	`user_id` int null default null			comment 'ÓÃ»§id',
-	`balance`	double null default null	comment 'Óà¶î',
+	`card_id` int auto_increment			comment 'å¡å·',
+	`user_id` int null default null			comment 'ç”¨æˆ·id',
+	`balance`	double null default null	comment 'ä½™é¢',
 	primary key (`card_id`) using btree
-)ENGINE=InnoDB AUTO_INCREMENT = 12000 comment 'ÒøÐÐ¿¨ÐÅÏ¢±í';
+)ENGINE=InnoDB AUTO_INCREMENT = 12000 comment 'é“¶è¡Œå¡ä¿¡æ¯è¡¨';
 
 drop table if exists `trade`;
 create table `trade`(
-	`id` int auto_increment					comment '½»Ò×id',
-	`card_id`	int not null				comment 'ÒøÐÐ¿¨id',
-	`to_card_id` int null					comment '×ªÕËµ½µÄÒøÐÐ¿¨id',
-	`trade_type` int default null			comment '½»Ò×ÀàÐÍ',
-	`trade_time` datetime default now()		comment '½»Ò×Ê±¼ä',
-	`pre_money` double						comment '½»Ò×Ç°Óà¶î',
-	`curr_money` double						comment '½»Ò×ºóÓà¶î',
+	`id` int auto_increment					comment 'äº¤æ˜“id',
+	`card_id`	int not null				comment 'é“¶è¡Œå¡id',
+	`to_card_id` int null					comment 'è½¬è´¦åˆ°çš„é“¶è¡Œå¡id',
+	`trade_type` int default null			comment 'äº¤æ˜“ç±»åž‹',
+	`trade_time` datetime default now()		comment 'äº¤æ˜“æ—¶é—´',
+	`pre_money` double						comment 'äº¤æ˜“å‰ä½™é¢',
+	`curr_money` double						comment 'äº¤æ˜“åŽä½™é¢',
 	primary key (`id`) using btree
-)ENGINE=InnoDB AUTO_INCREMENT = 10000 comment '½»Ò×ÐÅÏ¢±í';
+)ENGINE=InnoDB AUTO_INCREMENT = 10000 comment 'äº¤æ˜“ä¿¡æ¯è¡¨';
+
+-- # å­˜æ¬¾
+-- update card set balance=balance + 10000 where card_id=12001;
+-- insert into trade values(default, 12001, 12001, 1, now(), preBalance, postBalance);
+
+-- # å–æ¬¾
+-- update card set balance=balance - 10000 where card_id=12001;
+-- insert into trade values(default, 12001, 12001, 1, now(), preBalance, postBalance);
+
+-- # è½¬è´¦ 12001 -> 12002
+-- update card set balance=balance - 10000 where card_id=12001;
+-- update card set balance=balance + 10000 where card_id=12002;
+-- insert into trade values(default, 12001, 12002, 1, now(), preBalance, postBalance);
 
 SET FOREIGN_KEY_CHECKS = 1;
 
