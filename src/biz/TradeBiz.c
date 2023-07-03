@@ -34,6 +34,10 @@ void start_trade()
 				return;
 			}
 			create_card(curr_window->customer->id);
+			Card newCard;			//新建的卡
+			query_card_latest(&newCard);
+			//更新id
+			choose_card = newCard.card_id;
 		}
 		else { //如果已有银行卡，输入要办理的卡号开始办理业务
 			printf("请输入办理业务的卡号（输入 0 进行办卡，输入其他数字结束业务办理）：");
